@@ -22,6 +22,10 @@ public class ArrayListVsLinkedList {
         addAllElements(linkedList);
         addAllElementsUsingForeach(arrayList);
         addAllElementsUsingForeach(linkedList);
+        streamExamples();
+    }
+
+    private static void streamExamples() {
         long start = System.currentTimeMillis();
         arrayList.stream()  //to jest tożsame
                 .mapToInt(e -> e)
