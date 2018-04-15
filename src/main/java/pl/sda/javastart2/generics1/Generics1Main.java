@@ -16,7 +16,9 @@ public class Generics1Main {
     }
 
     private static void firstStepInGenerics() {
-        OrangeBox orangeBox = new OrangeBox(new Orange());
-        AppleBox appleBox = new AppleBox(new Apple());
+        OrangeBox orangeBox =
+                new OrangeBox(new Orange());
+        AppleBox appleBox =
+                new AppleBox(new Apple());
     }
 }
