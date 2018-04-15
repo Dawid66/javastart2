@@ -18,6 +18,6 @@ public class GenericUtils {
     public static <T,G> List<G> formArrayToList(T[] array, Function<T,G> mysticFunction) {
         return Arrays.stream(array).map(mysticFunction).collect(Collectors.toList());
     }
-    
+
 
 }
