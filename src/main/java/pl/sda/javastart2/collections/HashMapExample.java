@@ -36,18 +36,23 @@ public class HashMapExample {
 
         System.out.println(peopleByName); //tylko 3 wartośći
 
-        properWayOfAddingPeople(ania, ola, tomek1, tomek2);
-
+        properWayOfAddingPeople(ania);
+        properWayOfAddingPeople(ania);
+        properWayOfAddingPeople(ola);
+        properWayOfAddingPeople(tomek1);
+        properWayOfAddingPeople(tomek2);
     }
 
-    private static void properWayOfAddingPeople(Person ania, Person ola, Person tomek1, Person tomek2) {
-        Map<String, List<Person>> peopleByNameProperWay = new HashMap<>();
-        if (peopleByNameProperWay.containsKey(ania.getName())) {
-            List<Person> people = peopleByNameProperWay.get(ania.getName());
-            people.add(ania);
+    private static void properWayOfAddingPeople(Person person) {
+        Map<String, List<Person>> map = new HashMap<>();
+        if (map.containsKey(person.getName())) {
+            String name = person.getName();
+            List<Person> people = map.get(name);
+            people.add(person);
         } else {
             List<Person> people = new ArrayList<>();
-            peopleByNameProperWay.put(ania.getName(), people);
+            people.add(person);
+            map.put(person.getName(), people);
         }
 
     }
