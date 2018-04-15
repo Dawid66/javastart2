@@ -2,6 +2,7 @@ package pl.sda.javastart2.collections;
 
 import pl.sda.javastart2.Person;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +43,11 @@ public class HashMapExample {
     private static void properWayOfAddingPeople(Person ania, Person ola, Person tomek1, Person tomek2) {
         Map<String, List<Person>> peopleByNameProperWay = new HashMap<>();
         if (peopleByNameProperWay.containsKey(ania.getName())) {
-
+            List<Person> people = peopleByNameProperWay.get(ania.getName());
+            people.add(ania);
+        } else {
+            List<Person> people = new ArrayList<>();
+            peopleByNameProperWay.put(ania.getName(), people);
         }
 
     }
