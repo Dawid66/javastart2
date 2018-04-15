@@ -2,34 +2,46 @@ package pl.sda.javastart2.collections;
 
 import pl.sda.javastart2.Person;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class ArrayListExample {
 
     public static void main(String[] args) {
 //        basicListOperations();
-        doesContainAll();
-        sortList();
+//        doesContainAll();
+//        sortList();
+//        basicExampleOfStream();
+//        additionalExampleOfStream();
+
+        legacyUseOfIterator();
+
     }
 
-    private static void sortList() {
-        List<Long> list = new ArrayList<>();
-        list.add(1L);
-        list.add(2L);
-        list.add(3L);
-        list.add(4L);
-        list.add(3L);
+    private static void legacyUseOfIterator() {
+        List<String> arrayList = new ArrayList<>();
+        arrayList.add("a");
+        arrayList.add("b");
+        arrayList.add("c");
 
-        list.sort(Comparator.naturalOrder());
+        System.out.println(arrayList);
 
-        Collections.sort(list);
+        Iterator iterator = arrayList.iterator();
+        while (iterator.hasNext()) {
+            Object next = iterator.next();
+            System.out.println(next);
+        }
 
-        System.out.println(list);
+        for (String s : arrayList) {
+            System.out.println(s);
+        }
 
+        arrayList.stream().forEach(e -> System.out.println(e));
+
+    }
+
+    private static void basicExampleOfStream() {
         List<Person> people = new ArrayList<>();
         people.add(new Person(123, "Ania"));
         people.add(new Person(122, "Tomek"));
@@ -46,11 +58,57 @@ public class ArrayListExample {
 
         List<Integer> pesels =
                 people.stream()
-                        .filter(person->!person.getName().equals("Adam"))
+                        .filter(person -> !person.getName().equals("Adam"))
                         .sorted((a, b) -> a.getName().compareTo(b.getName()))
                         .map(e -> e.getPesel())
                         .collect(Collectors.toList());
         System.out.println(pesels);
+    }
+
+    private static void additionalExampleOfStream() {
+        List<Person> people = new ArrayList<>();
+        people.add(new Person(123, "Ania"));
+        people.add(new Person(122, "Tomek"));
+        people.add(new Person(15, "Adam"));
+        people.add(new Person(12, "Ola"));
+
+        Collections.sort(people);
+        System.out.println(people);
+
+        System.out.println(people.stream()
+                .sorted((a, b) -> a.getPesel().compareTo(b.getPesel()))
+                .map(e -> e.getName())
+                .collect(Collectors.joining(", ")));
+
+        Predicate<Person> adamTest = person -> {
+            System.out.println("LAMBDA Się odpaliła dla " + person.getName());
+            return !person.getName().equals("Adam");
+        };
+
+        List<Integer> pesels =
+                people.stream() //strumień ludzi
+                        .filter(e -> e.getName().equals("Monika"))
+                        .filter(adamTest)
+                        .sorted((a, b) -> a.getName().compareTo(b.getName()))
+                        .map(e -> e.getPesel())
+                        .collect(Collectors.toList());
+        System.out.println(pesels);
+    }
+
+    private static void sortList() {
+        List<Long> list = new ArrayList<>();
+        list.add(1L);
+        list.add(2L);
+        list.add(3L);
+        list.add(4L);
+        list.add(3L);
+
+        list.sort(Comparator.naturalOrder());
+
+        Collections.sort(list);
+
+        System.out.println(list);
+
     }
 
     private static void doesContainAll() {
