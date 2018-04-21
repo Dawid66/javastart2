@@ -15,9 +15,9 @@ public class Collections2 {
     }
 
     private static Map<Double, List<Customer>> salaryWithPersonListWithStream() {
-       return giveMeCustomers()
-               .stream()
-               .collect(Collectors.groupingBy(e -> e.getSalary()));
+        return giveMeCustomers()
+                .stream()
+                .collect(Collectors.groupingBy(e -> e.getSalary()));
     }
 
     private static Map<Double, List<Customer>> salaryWithPersonList() {
@@ -42,22 +42,21 @@ public class Collections2 {
     private static Map<Double, Long> salaryStatsWithStream() {
         return giveMeCustomers().stream()
                 .collect(Collectors.groupingBy(
-                        e -> (double) e.getSalary(),
+                        e -> e.getSalary(),
                         Collectors.counting()
                         )
                 );
     }
 
     protected static Map<Double, Integer> salaryStats() {
-
         List<Customer> customers = giveMeCustomers();
         Map<Double, Integer> map = Maps.newHashMap();
         for (Customer customer : customers) {
-            if (map.containsKey(((double) customer.getSalary()))) {
-                Integer integer = map.get((double) customer.getSalary());
-                map.replace((double) customer.getSalary(), integer + 1);
+            if (map.containsKey((customer.getSalary()))) {
+                Integer integer = map.get(customer.getSalary());
+                map.replace(customer.getSalary(), integer + 1);
             } else {
-                map.put((double) customer.getSalary(), 1);
+                map.put(customer.getSalary(), 1);
             }
         }
         return map;
