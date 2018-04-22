@@ -10,8 +10,8 @@ import java.util.List;
 public class ThreadsExample {
 
     public static void main(String[] args) {
-        runnableBasics();
-        bank();
+//        runnableBasics();
+//        bank();
         bankWithThreads();
     }
 
@@ -21,12 +21,23 @@ public class ThreadsExample {
             actions.add(new BankClientAction());
         }
 
-        List<Thread> threads = Lists.newArrayList();
+        List<Thread> threadsList = Lists.newArrayList();
+        for (BankClientAction action : actions) {
+            threadsList.add(new Thread(action));
+        }
 
         Instant start = Instant.now();
-        for (BankClientAction action : actions) {
-            action.run();
+        for (Thread thread : threadsList) {
+            thread.start();
         }
+        for (Thread thread : threadsList) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("Ilość operacji " + Bank.operations);
         System.out.println(
                 Duration.between(start, Instant.now()).getNano()
         );
