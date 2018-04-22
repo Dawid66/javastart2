@@ -8,11 +8,29 @@ import java.util.stream.Collectors;
 
 public class Collections2 {
     public static void main(String[] args) {
-        giveMeNameAndSurnameList();
-        giveMeNameAndSurnameListWithStream();
-        salaryStats();
-        salaryStatsWithStream();
-        nameSalaryStats();
+//        giveMeNameAndSurnameList();
+//        giveMeNameAndSurnameListWithStream();
+//        salaryStats();
+//        salaryStatsWithStream();
+        Map<String, Map<Double, Integer>> nameSalaryStats = nameSalaryStats();
+
+        iterateOverMap(nameSalaryStats);
+
+    }
+
+    private static void iterateOverMap(Map<String, Map<Double, Integer>> nameSalaryStats) {
+        for (String name : nameSalaryStats.keySet()) {
+            System.out.println(name);
+        }
+        System.out.println("+--------------------------");
+        for (Map<Double, Integer> innerMap : nameSalaryStats.values()) {
+            System.out.println(innerMap);
+        }
+        System.out.println("+--------------------------");
+        for (Map.Entry<String, Map<Double, Integer>> mapEntry : nameSalaryStats.entrySet()) {
+            System.out.println(mapEntry);
+        }
+
     }
 
     //NApisz metodę, która zwróci mapę map <imię,<zarobki,liczba_osób_z_takimi_zarobkami>>
