@@ -2,19 +2,24 @@ package pl.sda.javastart2.exceptions;
 
 public class ExceptionsExample {
     public static void main(String[] args) {
-        simpleExceptionWhenDividing();
+//        simpleExceptionWhenDividing();
 
         Integer[] integers = {1, 2, 3};
 
         SimplePositiveNumbersBox<Integer> positiveNumbersBox =
                 new SimplePositiveNumbersBox<>(integers);
-        Integer value = positiveNumbersBox.getValue(1);
+        try {
+            Integer value = positiveNumbersBox.getValue(5);
+        }catch (OutOfBoxException exc){
+            System.out.println(exc.getMessage());
+        }
 
         try {
-            positiveNumbersBox.setValue(1, 4);
-        } catch (OutOfBoxException x) {
+            positiveNumbersBox.setValue(6, -2);
+        } catch (OutOfBoxException | RuntimeException x) {
             System.out.println(x.getMessage());
         }
+        System.out.println("SZCZĘSliwie Koniec");
     }
 
     private static void simpleExceptionWhenDividing() {

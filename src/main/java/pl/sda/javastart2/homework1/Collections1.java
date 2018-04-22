@@ -1,8 +1,12 @@
 package pl.sda.javastart2.homework1;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -17,6 +21,9 @@ public class Collections1 {
                 "dog", "cat", "  pig", "dog",null};
         changeToSet(animals);
         changeToSetWithStream(animals);
+        Lists.newArrayList("cat", "dog");
+        Sets.newHashSet("cat", "dog");
+        HashMap<Object, Object> objectObjectHashMap = Maps.newHashMap();
 
     }
 
