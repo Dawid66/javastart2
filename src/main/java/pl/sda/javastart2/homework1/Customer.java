@@ -1,6 +1,9 @@
 package pl.sda.javastart2.homework1;
 
-public class Customer {
+import java.io.Serializable;
+
+public class Customer implements Serializable{
+
     private static int counter = 1;
 
     private int id;

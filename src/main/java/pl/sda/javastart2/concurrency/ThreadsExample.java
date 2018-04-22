@@ -6,13 +6,29 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ThreadsExample {
 
     public static void main(String[] args) {
 //        runnableBasics();
 //        bank();
-        bankWithThreads();
+//        bankWithThreads();
+        bankWithExecutors();
+    }
+
+    private static void bankWithExecutors() {
+        ExecutorService executorService = Executors.newFixedThreadPool(4);
+        List<BankClientAction> actions = Lists.newArrayList();
+        for (int i = 0; i < 1000; i++) {
+            actions.add(new BankClientAction());
+        }
+        for (BankClientAction action : actions) {
+            executorService.submit(action);
+        }
+
     }
 
     private static void bankWithThreads() {
