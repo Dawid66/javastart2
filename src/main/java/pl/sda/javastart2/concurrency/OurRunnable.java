@@ -8,7 +8,7 @@ public class OurRunnable implements Runnable {
         System.out.println(Thread.currentThread().getName()
                 + " Specjalna nowa klasa");
         try {
-            TimeUnit.SECONDS.sleep(1); //symulacja długiej operacji
+            TimeUnit.SECONDS.sleep(5); //symulacja długiej operacji
             System.out.println(Thread.currentThread().getName()+
             " Skończyłem długą czynność");
         } catch (InterruptedException e) {
