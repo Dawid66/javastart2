@@ -12,6 +12,31 @@ public class Collections2 {
         giveMeNameAndSurnameListWithStream();
         salaryStats();
         salaryStatsWithStream();
+        nameSalaryStats();
+    }
+
+    //NApisz metodę, która zwróci mapę map <imię,<zarobki,liczba_osób_z_takimi_zarobkami>>
+    protected static Map<String, Map<Double, Integer>> nameSalaryStats() {
+        List<Customer> customers = giveMeCustomers();
+//        Map<String, Map<Double, Integer>> resultMap = Maps.newHashMap();
+        customers.stream().forEach(e->e.setName(e.getName().trim()));
+        Map<String, Map<Double, Integer>> resultMap = new HashMap<>();
+        for (Customer customer : customers) {
+            if (resultMap.containsKey(customer.getName())) { //sprawdzamy czy imię istnieje
+                Map<Double, Integer> innerMap = resultMap.get(customer.getName());
+                if (innerMap.containsKey(customer.getSalary())) {
+                    Integer counter = innerMap.get(customer.getSalary());
+                    innerMap.replace(customer.getSalary(), counter + 1);
+                } else {
+                    innerMap.put(customer.getSalary(), 1);
+                }
+            } else { //sytuacja kiedy imię nie istnieje w mapie
+                Map<Double, Integer> newMap = Maps.newHashMap();
+                newMap.put(customer.getSalary(), 1);
+                resultMap.put(customer.getName(), newMap);
+            }
+        }
+        return resultMap;
     }
 
     private static Map<Double, List<Customer>> salaryWithPersonListWithStream() {
@@ -48,13 +73,15 @@ public class Collections2 {
                 );
     }
 
+    //Napisz metodę, która zwróci statystykę ile jest osób z danymi
+    //zarobkami <zarobki,liczba_osób> Map<Double,Integer>
     protected static Map<Double, Integer> salaryStats() {
         List<Customer> customers = giveMeCustomers();
-        Map<Double, Integer> map = Maps.newHashMap();
+        Map<Double, Integer> map = new HashMap<>();
         for (Customer customer : customers) {
-            if (map.containsKey((customer.getSalary()))) {
-                Integer integer = map.get(customer.getSalary());
-                map.replace(customer.getSalary(), integer + 1);
+            if (map.containsKey(customer.getSalary())) {
+                Integer licznik = map.get(customer.getSalary());
+                map.replace(customer.getSalary(), licznik + 1);
             } else {
                 map.put(customer.getSalary(), 1);
             }

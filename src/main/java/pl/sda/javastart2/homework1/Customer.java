@@ -58,4 +58,8 @@ public class Customer {
                 ", salary=" + salary +
                 '}';
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
